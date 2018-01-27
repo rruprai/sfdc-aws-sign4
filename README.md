@@ -1,87 +1,74 @@
 # Project Title
 
-One Paragraph of project description goes here
+Salesforce and AWS Data Transfer using AWS Signature Version 4 Signing Process
+
+## Background Information
+
+This was build out of the need to send data between Salesforce and custom applications without saving Salesforce username and password in a config file outside of Salesforce. Rather than using OAuth to communicate to Salesfroce from the application, the decision was made to send the data to AWS then have either Salesforce or the custom application send or receive the data for process. This allowed for sending data in and out of Salesforce without having to store Salesforce username and password in a config file (or equivalent) on external systems. 
+
+I had to rebuild this from scratch so I apologize ahead of time for any issues, but I am more than willing to help get you up and running. The most important file is [AmzAwsSender.cls](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls) as it contains the logic required for AWS Signature Version 4. You can use the class to both send and receive data. 
+
+I did not see any open source version of this so I decided to make this public to help others who may want to do the same. I work full time so I will try to respond to queries asap so appreciate the patience ahead of time. I also developed a similar process to send data to Microsoft Azure using [Service Bus authentication with Shared Access Signatures](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-sas). A direct link to that repository can be found [here](https://github.com/rajruprai/sfdc-microsoft-azure-service-bus)
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+I would like to stress the importance of keeping up with the latest changes in regards to [AWS Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). The process may change faster than I can update the code. 
+
+## Considerations
+
+* Ensure you follow the most up to date signing process
+* Test classes were added in order to assure code coverage, but you just need to use the [AmzAwsSender](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls). It will allow you to send data to AWS endpoint in JSON format. 
+* [AmzAwsSenderTest](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSenderTest.cls) highlights an example usage of how to send data to AWS. This will need to be modified to best meet your situation.
+* I purposedly did not include a test mock callout because I do not have access to a live instance so assume you will need to create one according to [Salesforce's example](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_restful_http_testing_httpcalloutmock.htm)
+* For companies with multiple sandboxes and a production org, I would recommend using [forcedevtool](https://github.com/amtrack/force-dev-tool) to help manage differences between versions. This is an awesome tool that will make continuous integration easy.
+
+### Object
+
+AWS Connection was a custom object created to store the configurations of the connection between Salesforce and AWS endpoint. The main reason for choosing a custom object was because of the text(encrypted) field type, which is currently not available on custom settings nor custom metatdata types. Text (Encrypted) field type allows for an administrator to get the necessary security tokens that are needed for the AWS signing process to be stored securely. Through testing, I found that after I insert the key value into the field, I was no longer able to see what the value was because it was masked with characters. After attempting to access the value via [Apex Data Loader](https://developer.salesforce.com/page/Data_Loader) and other similar tools that allow for API access, I could not access the values, all I got was the masked characters, which made this a very secure option. 
+
+* For more information, see [About Encrypted Fields](https://help.salesforce.com/articleView?id=fields_about_encrypted_fields.htm&type=5) for more information.
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-Give examples
+* Install Ant Migration Tool (or MavenMate, Force.com IDE)
+* Install Git
 ```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+* Test classes can be run through the command line via a tool such as [forcedevtool](https://github.com/amtrack/force-dev-tool), Force.com IDE, or through the [Developer Console](https://developer.salesforce.com/page/Developer_Console)
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+* Download the repo
+* Using [Ant Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.daas.meta/daas/forcemigrationtool.htm) deploy to your sandbox for further testing
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Git](https://git-scm.com/) - Version Control Sysmte
+* [Ant Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.daas.meta/daas/forcemigrationtool_install.htm) - Used for exporting and importing metadata
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* To be determined, I put this together quickly so still need to figure out the strategy.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+I use [Git](https://git-scm.com/) for versioning. 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Raj Ruprai** - *Initial work* - [RajRuprai](https://github.com/rajruprai)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/rajruprai/sfdc-aws-sign4/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/LICENSE) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Raj Ruprai
