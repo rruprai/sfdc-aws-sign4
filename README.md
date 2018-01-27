@@ -22,11 +22,17 @@ I would like to stress the importance of keeping up with the latest changes in r
 * I purposedly did not include a test mock callout because I do not have access to a live instance so assume you will need to create one according to [Salesforce's example](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_restful_http_testing_httpcalloutmock.htm)
 * For companies with multiple sandboxes and a production org, I would recommend using [forcedevtool](https://github.com/amtrack/force-dev-tool) to help manage differences between versions. This is an awesome tool that will make continuous integration easy.
 
-### Object
+## AWS Connection Object
 
 AWS Connection was a custom object created to store the configurations of the connection between Salesforce and AWS endpoint. The main reason for choosing a custom object was because of the text(encrypted) field type, which is currently not available on custom settings nor custom metatdata types. Text (Encrypted) field type allows for an administrator to get the necessary security tokens that are needed for the AWS signing process to be stored securely. Through testing, I found that after I insert the key value into the field, I was no longer able to see what the value was because it was masked with characters. After attempting to access the value via [Apex Data Loader](https://developer.salesforce.com/page/Data_Loader) and other similar tools that allow for API access, I could not access the values, all I got was the masked characters, which made this a very secure option. 
 
+Field History tracking was added just in case a value was changed incedently. 
+
 * For more information, see [About Encrypted Fields](https://help.salesforce.com/articleView?id=fields_about_encrypted_fields.htm&type=5) for more information.
+
+## AWS Log Entry Object
+
+This object was mainly added for logging purposes from Salesforce regardless of sending or receiving. It contains the basic fields such as the body, header, status, and status code. Whether or not you use this is totally dependent on the use case. If you have a method of logging requests then this may be overkill, but for those who do not have access to proper logging mechanisms, this object can be used to store any exceptions or successful requests to and from AWS. 
 
 ### Prerequisites
 
