@@ -1,7 +1,3 @@
-# Project Title
-
-Salesforce and AWS Data Transfer using AWS Signature Version 4 Signing Process
-
 ## Background Information
 
 This was build out of the need to send data between Salesforce and custom applications without saving Salesforce username and password in a config file outside of Salesforce. Rather than using OAuth to communicate to Salesfroce from the application, the decision was made to send the data to AWS then have either Salesforce or the custom application send or receive the data for process. This allowed for sending data in and out of Salesforce without having to store Salesforce username and password in a config file (or equivalent) on external systems. 
