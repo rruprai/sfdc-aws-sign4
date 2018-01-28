@@ -43,6 +43,10 @@ What things you need to install the software and how to install them
 
 * Test classes can be run through the command line via a tool such as [forcedevtool](https://github.com/amtrack/force-dev-tool), Force.com IDE, or through the [Developer Console](https://developer.salesforce.com/page/Developer_Console)
 
+## Batch Job
+
+Given that there are [Apex Callout Limits](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_callouts_timeouts.htm), you should write a batch class that will process all the records you need, insert it into a single JSON with your desired format, and then make one callout. A future release will be to write one in this repository, but given time limits, the dates are to be determined.
+
 ## Deployment
 
 * Download the repo
@@ -52,10 +56,6 @@ What things you need to install the software and how to install them
 
 * [Git](https://git-scm.com/) - Version Control Sysmte
 * [Ant Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.daas.meta/daas/forcemigrationtool_install.htm) - Used for exporting and importing metadata
-
-## Contributing
-
-* To be determined, I put this together quickly so still need to figure out the strategy.
 
 ## Versioning
 
