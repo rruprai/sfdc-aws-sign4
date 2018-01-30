@@ -6,6 +6,7 @@
         <members>AmzAwsSender</members>
         <members>AmzAwsSenderTest</members>
         <members>AmzAwsWrapper</members>
+        <members>AmzAwsWrapperTest</members>
         <members>DataFactoryAws</members>
         <members>DataFactoryAwsTest</members>
         <members>ObjectUtility</members>
