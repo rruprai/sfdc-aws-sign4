@@ -2,9 +2,9 @@
 
 This was build out of the need to send data between Salesforce and custom applications without saving Salesforce username and password in a config file outside of Salesforce. Rather than using OAuth to communicate to Salesfroce from the application, the decision was made to send the data to AWS then have either Salesforce or the custom application send or receive the data for process. This allowed for sending data in and out of Salesforce without having to store Salesforce username and password in a config file (or equivalent) on external systems. 
 
-I had to rebuild this from scratch so I apologize ahead of time for any issues, but I am more than willing to help get you up and running. The most important file is [AmzAwsSender.cls](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls) as it contains the logic required for AWS Signature Version 4. You can use the class to both send and receive data. 
+I had to rebuild this from scratch so I apologize ahead of time for any issues, but I am more than willing to help get you up and running. The most important file is [AmzAwsSender.cls](https://github.com/userraj/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls) as it contains the logic required for AWS Signature Version 4. You can use the class to both send and receive data. 
 
-I did not see any open source version of this so I decided to make this public to help others who may want to do the same. I work full time so I will try to respond to queries asap so appreciate the patience ahead of time. I also developed a similar process to send data to Microsoft Azure using [Service Bus authentication with Shared Access Signatures](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-sas). A direct link to that repository can be found [here](https://github.com/rajruprai/sfdc-microsoft-azure-service-bus)
+I did not see any open source version of this so I decided to make this public to help others who may want to do the same. I work full time so I will try to respond to queries asap so appreciate the patience ahead of time. I also developed a similar process to send data to Microsoft Azure using [Service Bus authentication with Shared Access Signatures](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-sas). A direct link to that repository can be found [here](https://github.com/userraj/sfdc-microsoft-azure-service-bus)
 
 ## Getting Started
 
@@ -13,8 +13,8 @@ I would like to stress the importance of keeping up with the latest changes in r
 ## Considerations
 
 * Ensure you follow the most up to date signing process
-* Test classes were added in order to assure code coverage, but you just need to use the [AmzAwsSender](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls). It will allow you to send data to AWS endpoint in JSON format. 
-* [AmzAwsSenderTest](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/classes/AmzAwsSenderTest.cls) highlights an example usage of how to send data to AWS. This will need to be modified to best meet your situation.
+* Test classes were added in order to assure code coverage, but you just need to use the [AmzAwsSender](https://github.com/userraj/sfdc-aws-sign4/blob/master/classes/AmzAwsSender.cls). It will allow you to send data to AWS endpoint in JSON format. 
+* [AmzAwsSenderTest](https://github.com/userraj/sfdc-aws-sign4/blob/master/classes/AmzAwsSenderTest.cls) highlights an example usage of how to send data to AWS. This will need to be modified to best meet your situation.
 * I purposedly did not include a test mock callout because I do not have access to a live instance so assume you will need to create one according to [Salesforce's example](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_restful_http_testing_httpcalloutmock.htm)
 * For companies with multiple sandboxes and a production org, I would recommend using [forcedevtool](https://github.com/amtrack/force-dev-tool) to help manage differences between versions. This is an awesome tool that will make continuous integration easy.
 
@@ -54,23 +54,14 @@ Given that there are [Apex Callout Limits](https://developer.salesforce.com/docs
 
 ## Built With
 
-* [Git](https://git-scm.com/) - Version Control Sysmte
+* [Git](https://git-scm.com/) - Version Control System
 * [Ant Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.daas.meta/daas/forcemigrationtool_install.htm) - Used for exporting and importing metadata
 
 ## Versioning
 
-I use [Git](https://git-scm.com/) for versioning. 
-
-## Authors
-
-* **Raj Ruprai** - *Initial work* - [RajRuprai](https://github.com/rajruprai)
-
-See also the list of [contributors](https://github.com/rajruprai/sfdc-aws-sign4/graphs/contributors) who participated in this project.
+I use [Git](https://git-scm.com/) for versioning.
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/rajruprai/sfdc-aws-sign4/blob/master/LICENSE) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/userraj/sfdc-aws-sign4/blob/master/LICENSE) file for details
 
-## Acknowledgments
-
-* Raj Ruprai
