@@ -20,7 +20,7 @@ I would like to stress the importance of keeping up with the latest changes in r
 
 ## AWS Connection Object
 
-AWS Connection was a custom object created to store the configurations of the connection between Salesforce and AWS endpoint. The main reason for choosing a custom object was because of the text(encrypted) field type, which is currently not available on custom settings nor custom metatdata types. Text (Encrypted) field type allows for an administrator to get the necessary security tokens that are needed for the AWS signing process to be stored securely. Through testing, I found that after I insert the key value into the field, I was no longer able to see what the value was because it was masked with characters. After attempting to access the value via [Apex Data Loader](https://developer.salesforce.com/page/Data_Loader) and other similar tools that allow for API access, I could not access the values, all I got was the masked characters, which made this a very secure option. 
+AWS Connection was a custom object created to store the configurations of the connection between Salesforce and AWS endpoint. The main reason for choosing a custom object was because of the text(encrypted) field type, which is currently not available on custom settings nor custom metatdata types. Text (Encrypted) field type allows for an administrator to get the necessary security tokens that are needed for the AWS signing process to be stored securely. 
 
 Field History tracking was added just in case a value was changed incedently. 
 
